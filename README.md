@@ -4,7 +4,8 @@ We've learned a lot.  We've learned to be declarative.  Now lets write
 something with being declarative in mind.  Sad thing is that we could
 have been writing javascript that was this simple since 1995.
 
-Simple, easy to follow, TodoMVC in 142 sloc and 0 frameworks: https://tantaman.github.io/fk-your-frameworks-todomvc/
+Simple, easy to follow, TodoMVC in 142 sloc and 0 frameworks.
+Demo: https://tantaman.github.io/fk-your-frameworks-todomvc/
 
 ## Inspiration
 
