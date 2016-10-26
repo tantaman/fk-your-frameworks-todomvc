@@ -35,7 +35,7 @@ I.e., instead of doing
 with a Redux reducer and action, you'll just do:
 
   ```
-  askForMutation(`todo.complete = true`);
+  askForMutation(`todo.completed = !todo.completed`);
   ```
 
 The runtime will know exactly which parts of state need to be re-mapped & re-filtered
