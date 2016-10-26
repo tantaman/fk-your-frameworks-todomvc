@@ -134,7 +134,7 @@ var state = {
   newTodo: '',
   items: [
     {
-      name: 'Fk\'em',
+      name: 'Unbloat',
       complete: true,
     },
   ],
