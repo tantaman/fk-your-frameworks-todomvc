@@ -8,7 +8,7 @@ have been writing javascript that was this simple since 1995.
 Live demo: https://tantaman.github.io/fk-your-frameworks-todomvc/
 
 ### Caveats:
-A hole in this implementation is event handling.  Problem is that we can't pass
+A sore in this implementation is event handling.  Problem is that we can't pass
 the actual object that we care about updating to the event handlers.
 
 Another problem (if you're a redux/elm/flux fan) are the direct data mutations.
@@ -33,7 +33,7 @@ with a Redux reducer and action, you'll do:
   ```
 
 The runtime will know exactly which parts of state need to be re-mapped
-in order to preserve immutability of state as well as perform an atomic update
-of the state tree.
+in order to preserve immutability, preserve histry and perform an atomic
+update of the state tree.
 
 Final issue is inputs lose focus after "turning the crank."
