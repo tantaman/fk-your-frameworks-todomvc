@@ -1,12 +1,10 @@
-# Fk Your Frameworks
-## Fk Your Bloated Code
+# ^%&* Your Bloated Code
 
 We've learned a lot.  We've learned to be declarative.  Now lets write
 something with being declarative in mind.  Sad thing is that we could
 have been writing javascript that was this simple since 1995.
 
-Live demo: https://tantaman.github.io/fk-your-frameworks-todomvc/
-142 sloc.
+Simple, easy to follow, TodoMVC in 142 sloc and 0 frameworks: https://tantaman.github.io/fk-your-frameworks-todomvc/
 
 ## Inspiration
 
@@ -43,3 +41,5 @@ in order to preserve immutability, preserve history and perform an atomic
 update of the state tree.
 
 Final issue is inputs lose focus after "turning the crank."
+
+This is a toy so I use `innerHTML = ` I.e., you could shoot yourself in the foot with whatever markup you decide to throw into a todo.
