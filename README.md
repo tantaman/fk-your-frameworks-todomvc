@@ -6,12 +6,13 @@ something with being declarative in mind.  Sad thing is that we could
 have been writing javascript that was this simple since 1995.
 
 Live demo: https://tantaman.github.io/fk-your-frameworks-todomvc/
+142 sloc.
 
-### Caveats:
-A sore in this implementation is event handling.  Problem is that we can't pass
+### Notes:
+A visual sore in this implementation is event handling.  Problem is that we can't pass
 the actual object that we care about updating to the event handlers.
 
-Another problem (if you're a redux/elm/flux fan) are the direct data mutations.
+Another thing to note (if you're a redux/elm/flux fan) are the direct data mutations.
 I'm writing an article to address this problem shortly and describe how
 we can make Redux and Elm actions & reductions declarative.
 
@@ -33,7 +34,7 @@ with a Redux reducer and action, you'll do:
   ```
 
 The runtime will know exactly which parts of state need to be re-mapped
-in order to preserve immutability, preserve histry and perform an atomic
+in order to preserve immutability, preserve history and perform an atomic
 update of the state tree.
 
 Final issue is inputs lose focus after "turning the crank."
