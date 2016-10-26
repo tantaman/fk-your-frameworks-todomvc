@@ -10,7 +10,7 @@ Live demo: https://tantaman.github.io/fk-your-frameworks-todomvc/
 
 ## Inspiration
 
-All of these TodoMVC apps (http://todomvc.com/) are incredibly bloated.  The "vanilla" Javascript one (https://github.com/tastejs/todomvc/tree/gh-pages/examples/vanillajs) weighs in at 800 sloc!
+Many of the TodoMVC apps (http://todomvc.com/) are incredibly bloated.  The "vanilla" Javascript one (https://github.com/tastejs/todomvc/tree/gh-pages/examples/vanillajs) weighs in at 800 sloc!  Others are just hard to follow.
 I've also realised that even though we have React which lets us be declarative about our views, we're still not being declarative about our data.  This base app will be extended to cover "declarative state" and "declarative state transitions."
 
 ### Notes:
