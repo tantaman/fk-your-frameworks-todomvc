@@ -112,6 +112,8 @@ function onCreate(e) {
     });
     state.newTodo = '';
     turnTheCrank('todoInput');
+  } else {
+    state.newTodo = e.target.value+e.key;
   }
 }
 function onSave(e, i) {
@@ -125,18 +127,20 @@ function onSave(e, i) {
 function toggle(i) { state.items[i].complete = !state.items[i].complete; turnTheCrank(); }
 function remove(i) { state.items.splice(i, 1); turnTheCrank(); }
 function startEditing(i) { state.items[i]._editing = true; turnTheCrank(); }
-function updateFilter(filter) { state.filter = filter; window.location.hash = filter; turnTheCrank(); }
+function updateFilter(filter) { window.location.hash = filter; }
+window.onhashchange = function() {
+  state.filter = window.location.hash.split('#')[1] || '';
+  turnTheCrank();
+}
 const getFinalText = (e) => e.which === 13 || e.type === 'blur' ? escapeSpecialChars(e.target.value.trim()) : null;
-
-var tempEl = document.createElement('div');
+const tempEl = document.createElement('div');
 function escapeSpecialChars(value) {
   tempEl.textContent = value;
   return tempEl.innerHTML;
 }
-
-var container = document.getElementById('container');
+const container = document.getElementById('container');
 const prevState = localStorage.getItem('todo-decl');
-var state = {
+const state = {
   filter: window.location.hash.split('#')[1] || '',
   newTodo: '',
   items: (prevState && JSON.parse(prevState)) || [{
@@ -144,7 +148,6 @@ var state = {
     complete: true,
   }],
 };
-
 function turnTheCrank(refocus) {
   requestAnimationFrame(() => {
     container.innerHTML = todoApp(state);
