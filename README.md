@@ -43,5 +43,3 @@ in order to preserve immutability, preserve history and perform an atomic
 update of the state tree.
 
 Final issue is inputs lose focus after "turning the crank."
-
-This is a toy so I use `innerHTML = ` I.e., you could shoot yourself in the foot with whatever markup you decide to throw into a todo.
