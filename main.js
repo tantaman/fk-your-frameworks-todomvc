@@ -1,13 +1,12 @@
 const tempEl = document.createElement('div');
 const sanitize = (value) => {
-  if (!value) {
-    return '';
-  }
-  if (typeof value === 'object' && value.__html__) {
-    return value.__html__;
-  }
-  if (Array.isArray(value)) {
-    return value.map(sanitize).join('');
+  if (value) {
+    if (typeof value === 'object' && value.__html__) {
+      return value.__html__;
+    }
+    if (Array.isArray(value)) {
+      return value.map(sanitize).join('');
+    }
   }
   tempEl.textContent = value;
   return tempEl.innerHTML;
