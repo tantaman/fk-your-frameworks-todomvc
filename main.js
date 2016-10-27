@@ -125,22 +125,28 @@ function onSave(e, i) {
 function toggle(i) { state.items[i].complete = !state.items[i].complete; turnTheCrank(); }
 function remove(i) { state.items.splice(i, 1); turnTheCrank(); }
 function startEditing(i) { state.items[i]._editing = true; turnTheCrank(); }
-function updateFilter(filter) { state.filter = filter; turnTheCrank(); }
-const getFinalText = (e) => e.which === 13 || e.type === 'blur' ? e.target.value.trim() : null;
+function updateFilter(filter) { state.filter = filter; window.location.hash = filter; turnTheCrank(); }
+const getFinalText = (e) => e.which === 13 || e.type === 'blur' ? escapeSpecialChars(e.target.value.trim()) : null;
+
+var tempEl = document.createElement('div');
+function escapeSpecialChars(value) {
+  tempEl.textContent = value;
+  return tempEl.innerHTML;
+}
 
 var container = document.getElementById('container');
+const prevState = localStorage.getItem('todo-decl');
 var state = {
-  filter: 'all',
+  filter: window.location.hash.split('#')[1] || '',
   newTodo: '',
-  items: [
-    {
-      name: 'Unbloat',
-      complete: true,
-    },
-  ],
+  items: (prevState && JSON.parse(prevState)) || [{
+    name: 'Unbloat',
+    complete: true,
+  }],
 };
 
 function turnTheCrank() {
   requestAnimationFrame(() => container.innerHTML = todoApp(state));
 }
+window.onbeforeunload = () => localStorage.setItem('todo-decl', JSON.stringify(state.items));
 turnTheCrank();
