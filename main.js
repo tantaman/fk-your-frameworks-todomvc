@@ -27,7 +27,7 @@ const header = () =>
     <input
       type="text"
       class="new-todo"
-      autofocus="true"
+      id="todoInput"
       placeholder="What needs to be done?"
       onkeydown="onCreate(event)"
       value="${state.newTodo}"
@@ -111,7 +111,7 @@ function onCreate(e) {
       complete: false,
     });
     state.newTodo = '';
-    turnTheCrank();
+    turnTheCrank('todoInput');
   }
 }
 function onSave(e, i) {
@@ -145,8 +145,11 @@ var state = {
   }],
 };
 
-function turnTheCrank() {
-  requestAnimationFrame(() => container.innerHTML = todoApp(state));
+function turnTheCrank(refocus) {
+  requestAnimationFrame(() => {
+    container.innerHTML = todoApp(state);
+    if (refocus) document.getElementById(refocus).focus();
+  });
 }
 window.onbeforeunload = () => localStorage.setItem('todo-decl', JSON.stringify(state.items));
 turnTheCrank();
