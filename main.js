@@ -83,7 +83,7 @@ const footer = (remaining, items) => {
       </span>
       <ul class="filters">
         <li>
-          <a class="${state.filter === 'all' ? 'selected' : ''}" onClick="updateFilter('all')">All</a>
+          <a class="${state.filter === '' ? 'selected' : ''}" onClick="updateFilter('')">All</a>
         </li>
         <li>
           <a class="${state.filter === 'active' ? 'selected' : ''}" onClick="updateFilter('active')">Active</a>
