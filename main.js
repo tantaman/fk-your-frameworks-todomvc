@@ -112,8 +112,6 @@ function onCreate(e) {
     });
     state.newTodo = '';
     turnTheCrank('todoInput');
-  } else {
-    state.newTodo = e.target.value+e.key;
   }
 }
 function onSave(e, i) {
