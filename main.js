@@ -1,9 +1,30 @@
+const tempEl = document.createElement('div');
+const sanitize = (value) => {
+  if (!value) {
+    return '';
+  }
+  if (typeof value === 'object' && value.__html__) {
+    return value.__html__;
+  }
+  if (Array.isArray(value)) {
+    return value.map(sanitize).join('');
+  }
+  tempEl.textContent = value;
+  return tempEl.innerHTML;
+};
+
+const html = (parts, ...values) => {
+  return {__html__: parts.map((part, i) => {
+    return part + (i < values.length ? sanitize(values[i]) : '');
+  }).join('')};
+};
+
 const todoApp = (state) => {
   const remaining = state.items.filter(item => !item.complete);
   let toggleAll = '';
   if (state.items.length) {
     toggleAll =
-      `<input
+      html`<input
         type="checkbox"
         class="toggle-all"
         ${remaining.length ? '' : 'checked'}
@@ -11,18 +32,18 @@ const todoApp = (state) => {
       />`;
   }
   return (
-    `<div class="todoapp">
+    html`<div class="todoapp">
       ${header()}
       <section class="main">
         ${toggleAll}
-        <ul class="todo-list">${state.items.map(todo).join('')}</ul>
+        <ul class="todo-list">${state.items.map(todo)}</ul>
       </section>
       ${state.items.length ? footer(remaining, state.items) : ''}
     </div>`
   );
 }
 const header = () =>
-  `<header class="header">
+  html`<header class="header">
     <h1>todos</h1>
     <input
       type="text"
@@ -38,7 +59,7 @@ const todo = (item, i) => {
   if (state.filter === 'active' && item.complete) return '';
   let body = '';
   if (item._editing) {
-    body = `
+    body = html`
       <input
         type="text"
         class="edit"
@@ -49,7 +70,7 @@ const todo = (item, i) => {
       />
     `;
   } else {
-    body = `
+    body = html`
       <div class="view">
         <input
           type="checkbox"
@@ -63,7 +84,7 @@ const todo = (item, i) => {
     `;
   }
 
-  return `
+  return html`
     <li class="${item.complete ? 'completed' : ''} ${item._editing ? 'editing' : ''}">
       ${body}
     </li>
@@ -72,10 +93,10 @@ const todo = (item, i) => {
 const footer = (remaining, items) => {
   let clearCompleted = '';
   if (remaining.length !== items.length) {
-    clearCompleted = `<button class="clear-completed" onClick="clearCompleted()">Clear completed</button>`;
+    clearCompleted = html`<button class="clear-completed" onClick="clearCompleted()">Clear completed</button>`;
   }
   return (
-    `<footer class="footer">
+    html`<footer class="footer">
       <span class="todo-count">
         <strong>
           ${remaining.length ? remaining.length : 'No'}
@@ -132,12 +153,7 @@ window.onhashchange = function() {
   state.filter = window.location.hash.split('#')[1] || '';
   turnTheCrank();
 }
-const getFinalText = (e) => e.which === 13 || e.type === 'blur' ? escapeSpecialChars(e.target.value.trim()) : null;
-const tempEl = document.createElement('div');
-function escapeSpecialChars(value) {
-  tempEl.textContent = value;
-  return tempEl.innerHTML;
-}
+const getFinalText = (e) => e.which === 13 || e.type === 'blur' ? e.target.value.trim() : null;
 const container = document.getElementById('container');
 const prevState = localStorage.getItem('todo-decl');
 const state = {
@@ -150,7 +166,7 @@ const state = {
 };
 function turnTheCrank(refocus) {
   requestAnimationFrame(() => {
-    container.innerHTML = todoApp(state);
+    container.innerHTML = todoApp(state).__html__;
     if (refocus) document.getElementById(refocus).focus();
   });
 }
